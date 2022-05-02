@@ -3,7 +3,6 @@ use std::io;
 use std::process;
 use std::thread;
 fn pause() {
-    println!("");
     let mut inp = String::new();
     io::stdin()
         .read_line(&mut inp)
@@ -19,14 +18,14 @@ fn thread_creator(nb_threads: usize, iterations: i64) -> Vec<std::thread::JoinHa
             res
         }));
     }
-    return v;
+    v
 }
 fn main() {
     println!("Enter the number of threads that the program should run on:");
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
     let nb_threads = input.trim().parse::<i32>().unwrap_or_else(|_| {
-        println!("- Entered input is not Integer!");
+        println!("Input is not an integer");
         drop(input);
         process::exit(1);
     });
@@ -34,7 +33,7 @@ fn main() {
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
     let iterations = input.trim().parse::<i64>().unwrap_or_else(|_| {
-        println!("- Entered input is not Integer!");
+        println!("Input is not an integer");
         drop(input);
         process::exit(1);
     });
@@ -52,10 +51,9 @@ fn main() {
     let res: f64 = 4.0 * (inner as f64 / total as f64);
     println!("{}", res);
     pause();
-    return;
 }
 fn square(var: f64) -> f64 {
-    return var * var;
+    var * var
 }
 fn compute(iterations: i64) -> [i64; 2] {
     let mut counter: i64 = iterations;
